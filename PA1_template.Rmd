@@ -7,19 +7,42 @@ output:
 
 
 ## Loading and preprocessing the data
-
-
+```{r Loading & Preprocessing Data, echo=TRUE}
+x <- read.csv("./activity.csv")
+```
 
 ## What is mean total number of steps taken per day?
-
-
+```{r Steps Calcs, echo=TRUE}
+agg <- aggregate(x$steps, by=list(Date=x$date), FUN=sum, na.rm=TRUE)
+hist(agg$x,xlab="Total Steps Taken per Day",main="Histogram of Total Steps Taken per Day")
+mean_steps_byday <- mean(agg$x)
+median_steps_byday <- median(agg$x)
+```
 
 ## What is the average daily activity pattern?
+```{r Daily Active Pattern, echo=TRUE}
+agg2 <- aggregate(x$steps,by=list(Interval = x$interval), FUN=mean, na.rm=TRUE)
+plot(agg2$Interval, agg2$x, type="l", ylab="Average Step Number", xlab="5-minute Interval",
+     main="Average Step Number by 5-minute Interval")
 
-
+max_interval <- agg2[agg2$x == max(agg2$x),][1,1]
+```
 
 ## Imputing missing values
-
-
+```{r Missing Values, echo=TRUE}
+require(Hmisc)
+NA_values <- sum(is.na(x$steps))
+y <- impute(x$steps,median())
+x_i <- as.data.frame(cbind(y, x$date, x$interval))
+names(x_i) <- names(x)
+agg3 <- aggregate(x_i$steps, by=list(Date=x_i$date), FUN=sum)
+agg3$x <- as.integer(agg3$x)
+hist(agg3$x,xlab="Total Steps Taken per Day",main="Histogram of Total Steps Taken per Day\n(Imputed)")
+mean_steps_byday_i <- mean(agg3$x)
+median_steps_byday_i <- median(agg3$x)
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+```{r Weekdays vs. Weekends, echo=TRUE}
+## Code Blocks
+```
