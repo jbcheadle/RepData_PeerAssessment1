@@ -14,7 +14,7 @@ agg <- aggregate(x$steps, by=list(Date=x$date), FUN=sum, na.rm=TRUE)
 hist(agg$x,xlab="Total Steps Taken per Day",main="Histogram of Total Steps Taken per Day")
 ```
 
-![](PA1_template_files/figure-html/Steps Calcs-1.png)<!-- -->
+![](PA1_template_files/figure-html/Steps_Calcs-1.png)<!-- -->
 
 ```r
 mean_steps_byday <- mean(agg$x)
@@ -42,7 +42,7 @@ plot(agg2$Interval, agg2$x, type="l", ylab="Average Step Number", xlab="5-minute
      main="Average Step Number by 5-minute Interval")
 ```
 
-![](PA1_template_files/figure-html/Daily Active Pattern-1.png)<!-- -->
+![](PA1_template_files/figure-html/Daily_Active_Pattern-1.png)<!-- -->
 
 ```r
 max_interval <- agg2[agg2$x == max(agg2$x),][1,1]
@@ -121,7 +121,7 @@ agg3$x <- as.integer(agg3$x)
 hist(agg3$x,xlab="Total Steps Taken per Day",main="Histogram of Total Steps Taken per Day\n(Imputed)")
 ```
 
-![](PA1_template_files/figure-html/Missing Values-1.png)<!-- -->
+![](PA1_template_files/figure-html/Missing_Values-1.png)<!-- -->
 
 ```r
 mean_steps_byday_i <- mean(agg3$x)
@@ -187,4 +187,4 @@ ggplot(data=agg4, aes(Interval,x)) + geom_line() + facet_grid(agg4$Day ~ .) +
     labs(x="Interval", y = "Average Number of Steps", title = "Average Step Number by 5-minute Interval")
 ```
 
-![](PA1_template_files/figure-html/Weekdays vs. Weekends-1.png)<!-- -->
+![](PA1_template_files/figure-html/Weekdays_vs._Weekends-1.png)<!-- -->

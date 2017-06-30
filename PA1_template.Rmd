@@ -7,12 +7,12 @@ output:
 
 
 ## Loading and preprocessing the data
-```{r Loading & Preprocessing Data, echo=TRUE}
+```{r Loading_&_Preprocessing_Data, echo=TRUE}
 x <- read.csv("./activity.csv")
 ```
 
 ## What is mean total number of steps taken per day?
-```{r Steps Calcs, echo=TRUE}
+```{r Steps_Calcs, echo=TRUE}
 agg <- aggregate(x$steps, by=list(Date=x$date), FUN=sum, na.rm=TRUE)
 hist(agg$x,xlab="Total Steps Taken per Day",main="Histogram of Total Steps Taken per Day")
 mean_steps_byday <- mean(agg$x)
@@ -22,7 +22,7 @@ median_steps_byday
 ```
 
 ## What is the average daily activity pattern?
-```{r Daily Active Pattern, echo=TRUE}
+```{r Daily_Active_Pattern, echo=TRUE}
 agg2 <- aggregate(x$steps,by=list(Interval = x$interval), FUN=mean, na.rm=TRUE)
 plot(agg2$Interval, agg2$x, type="l", ylab="Average Step Number", xlab="5-minute Interval",
      main="Average Step Number by 5-minute Interval")
@@ -32,7 +32,7 @@ max_interval
 ```
 
 ## Imputing missing values
-```{r Missing Values, echo=TRUE}
+```{r Missing_Values, echo=TRUE}
 require(Hmisc)
 NA_values <- sum(is.na(x$steps))
 NA_values
@@ -51,7 +51,7 @@ median_steps_byday_i
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r Weekdays vs. Weekends, echo=TRUE}
+```{r Weekdays_vs._Weekends, echo=TRUE}
 require(ggplot2)
 require(dplyr)
 x <- mutate(x, weekday = weekdays(as.Date(date, "%Y-%m-%d")))
